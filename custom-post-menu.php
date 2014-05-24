@@ -36,7 +36,7 @@ class CustomPostMenu {
 			return;
 		}
 
-		add_meta_box('add_post_type', '画面に表示されるラベル', array(__CLASS__,
+		add_meta_box('add_post_type', 'カスタム投稿タイプ', array(__CLASS__,
 														   'add_post_type_inner'), 'nav-menus', 'side', 'low');
 
 		require_once(ABSPATH . 'wp-content/plugins/custom-post-menu/Walker_Nav_Menu_Checklist_Custom_Post_Type.php');
