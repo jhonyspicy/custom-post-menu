@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Post Menu
 Description: add custom post type to custom menu
-Version: 0.1
+Version: 0.3
 Author: jhonyspicy
 license: GPL v2
 */
@@ -159,7 +159,8 @@ class CustomPostMenu {
 	static function wp_nav_menu_args($args) {
 		if (!$args['walker']) {
 			$locations = get_nav_menu_locations();
-			if (!$args['menu'] && wp_get_nav_menu_object( $locations[ $args['theme_location'] ] )) {
+			$menu      = wp_get_nav_menu_object($args['menu']);
+			if ($menu || $locations[ $args['theme_location'] ]) {
 				$args['walker'] = new Walker_Nav_Menu_Custom_Post_Type();
 			}
 		}
