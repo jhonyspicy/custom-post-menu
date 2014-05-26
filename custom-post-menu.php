@@ -14,6 +14,10 @@ add_action('wp_ajax_add-menu-item', array('CustomPostMenu',
 							   'wp_ajax_add_menu_item'), 1);
 add_filter('wp_edit_nav_menu_walker', array('CustomPostMenu',
 											 'wp_edit_nav_menu_walker'));
+add_filter('wp_nav_menu_args', array('CustomPostMenu',
+											 'wp_nav_menu_args'));
+
+
 
 require_once(ABSPATH . 'wp-content/plugins/custom-post-menu/Walker_Nav_Menu_Custom_Post_Type.php');
 
@@ -36,7 +40,7 @@ class CustomPostMenu {
 			return;
 		}
 
-		add_meta_box('add_post_type', '画面に表示されるラベル', array(__CLASS__,
+		add_meta_box('add_post_type', 'カスタム投稿タイプ', array(__CLASS__,
 														   'add_post_type_inner'), 'nav-menus', 'side', 'low');
 
 		require_once(ABSPATH . 'wp-content/plugins/custom-post-menu/Walker_Nav_Menu_Checklist_Custom_Post_Type.php');
@@ -150,5 +154,16 @@ class CustomPostMenu {
 			echo walk_nav_menu_tree($menu_items, 0, (object)$args);
 		}
 		wp_die();
+	}
+
+	static function wp_nav_menu_args($args) {
+		if (!$args['walker']) {
+			$locations = get_nav_menu_locations();
+			if (!$args['menu'] && wp_get_nav_menu_object( $locations[ $args['theme_location'] ] )) {
+				$args['walker'] = new Walker_Nav_Menu_Custom_Post_Type();
+			}
+		}
+
+		return $args;
 	}
 }

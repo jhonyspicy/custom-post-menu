@@ -23,7 +23,11 @@ class Walker_Nav_Menu_Edit_Custom_Post_Type extends Walker_Nav_Menu_Edit {
 		} elseif ( 'post_type' == $item->type ) {
 			$original_object = get_post( $item->object_id );
 			$original_title = get_the_title( $original_object->ID );
+		} elseif ($item->type == 'custom_post_type') {
+			$item->type_label = 'カスタム投稿タイプ';
+			$original_title = $item->post_title;
 		}
+
 
 		$classes = array(
 			'menu-item menu-item-depth-' . $depth,
@@ -44,10 +48,6 @@ class Walker_Nav_Menu_Edit_Custom_Post_Type extends Walker_Nav_Menu_Edit {
 		}
 
 		$title = ( ! isset( $item->label ) || '' == $item->label ) ? $title : $item->label;
-
-		if ($item->type == 'custom_post_type') {
-			$item->type_label = 'カスタム投稿タイプ';
-		}
 
 		$submenu_text = '';
 		if ( 0 == $depth )
