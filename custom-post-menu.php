@@ -160,7 +160,7 @@ class CustomPostMenu {
 		if (!$args['walker']) {
 			$locations = get_nav_menu_locations();
 			$menu      = wp_get_nav_menu_object($args['menu']);
-			if ($menu || $locations[ $args['theme_location'] ]) {
+			if ($menu || (array_key_exists('theme_location', $args) && $args['theme_location'] && array_key_exists($args['theme_location'], $locations) && $locations[ $args['theme_location'] ])) {
 				$args['walker'] = new Walker_Nav_Menu_Custom_Post_Type();
 			}
 		}
