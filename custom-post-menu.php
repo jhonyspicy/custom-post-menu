@@ -11,11 +11,11 @@ add_filter('wp_setup_nav_menu_item', array('CustomPostMenu',
 add_action('admin_head-nav-menus.php', array('CustomPostMenu',
 											 'admin_menu'));
 add_action('wp_ajax_add-menu-item', array('CustomPostMenu',
-							   'wp_ajax_add_menu_item'), 1);
+										  'wp_ajax_add_menu_item'), 1);
 add_filter('wp_edit_nav_menu_walker', array('CustomPostMenu',
-											 'wp_edit_nav_menu_walker'));
+											'wp_edit_nav_menu_walker'));
 add_filter('wp_nav_menu_args', array('CustomPostMenu',
-											 'wp_nav_menu_args'));
+									 'wp_nav_menu_args'));
 
 
 
