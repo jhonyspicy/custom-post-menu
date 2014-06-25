@@ -25,7 +25,9 @@ class Walker_Nav_Menu_Edit_Custom_Post_Type extends Walker_Nav_Menu_Edit {
 			$original_title = get_the_title( $original_object->ID );
 		} elseif ($item->type == 'custom_post_type') {
 			$item->type_label = 'カスタム投稿タイプ';
-			$original_title = $item->post_title;
+
+			$post_type_object = get_post_type_object($item->object);
+			$original_title = $post_type_object->label;
 		}
 
 
